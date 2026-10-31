@@ -1,6 +1,6 @@
 # Отчёт · Проверка типов: Pylance и mypy
 
-**Студент:** ___, группа ___
+**Студент:** Марущак Сергей, группа РПО 25/2
 **Номер в журнале:** ___, вариант шага 4: ___
 
 Работа выполнена на втором архиве проекта «Отчёт кафе»
@@ -10,24 +10,24 @@
 
 В корне проекта создан файл `proba.py` с двумя неверными вызовами:
 `format_title(40)` и `format_kopeks("1250")`. Выбран интерпретатор
-из окружения проекта, внизу справа окна написано `.venv (___)`.
+из окружения проекта, внизу справа окна написано `.venv (3.12.3)`.
 
 ![proba.py в режиме off](img/06-01-off.png)
 
-В режиме `off` в файле подчёркнуто ___ аргументов. Ошибки типов в этом
+В режиме `off` в файле подчёркнуто 0 аргументов. Ошибки типов в этом
 режиме не показываются, аннотации идут только в подсказки.
 
 ## 2. Включение режима basic
 
-Настройка `python.analysis.typeCheckingMode` выбрана на вкладке ___,
-поэтому VS Code записал её в файл `___` внутри проекта.
+Настройка `python.analysis.typeCheckingMode` выбрана на вкладке Workspace,
+поэтому VS Code записал её в файл `.vscode/settings.json` внутри проекта.
 
 ![settings.json с режимом basic](img/06-02-settings.png)
 
 ## 3. Ошибки в редакторе
 
-После смены режима в `proba.py` подчёркнуты ___ и ___. На вкладке
-после имени файла стоит цифра ___.
+После смены режима в `proba.py` подчёркнуты `40` и `"1250"`. На вкладке
+после имени файла стоит цифра 2.
 
 ![Подчёркнутые аргументы в proba.py](img/06-03-squiggle.png)
 
@@ -35,9 +35,9 @@
 
 ![Сообщение Pylance над 40](img/06-04-hover.png)
 
-Pylance называет тип переданного значения `___`. Параметр `___`
-функции `format_title` ожидает тип `___`. Правило, по которому
-выдано сообщение, называется `___`.
+Pylance называет тип переданного значения `Literal[40]`. Параметр `text`
+функции `format_title` ожидает тип `str`. Правило, по которому
+выдано сообщение, называется `reportArgumentType`.
 
 ## 4. Моя ошибка и панель Problems
 
@@ -47,7 +47,7 @@ Pylance называет тип переданного значения `___`. �
 
 ![Панель Problems с тремя ошибками](img/06-05-problems.png)
 
-В панели Problems у `proba.py` ___ ошибки. Моя ошибка стоит
+В панели Problems у `proba.py` 3 ошибки. Моя ошибка стоит
 на месте `[Ln ___, Col ___]`, её короткая причина в конце сообщения:
 `___`.
 
@@ -58,20 +58,20 @@ Pylance называет тип переданного значения `___`. �
 
 | Режим | Сообщений |
 |---|---|
-| `off` | ___ |
-| `basic` | ___ |
-| `standard` | ___ |
-| `strict` | ___ |
+| `off` | 1 |
+| `basic` | 2 |
+| `standard` | 3 |
+| `strict` | 9 |
 
 ![rezhimy.py в режиме strict](img/06-06-strict.png)
 
 Только в `standard` и `strict` появилось сообщение про переменную
-`label`: `___`. После опыта возвращён режим `basic`.
+`label`: `"label" is possibly unbound`. После опыта возвращён режим `basic`.
 
 ## 6. Ошибки в терминале
 
-Версия mypy: `___`. Команда `mypy proba.py` закончилась строкой
-`Found ___ errors in ___ file (checked ___ source file)`.
+Версия mypy: `1.15.0 (compiled: yes)`. Команда `mypy proba.py` закончилась строкой
+`Found 3 errors in 1 file (checked 1 source file)`.
 
 ![mypy proba.py с ошибками](img/06-07-mypy-errors.png)
 
@@ -84,39 +84,39 @@ Pylance называет тип переданного значения `___`. �
 
 | Было | Стало |
 |---|---|
-| `format_title(40)` | `___` |
-| `format_kopeks("1250")` | `___` |
+| `format_title(40)` | `format_title("Итог")` |
+| `format_kopeks("1250")` | `format_kopeks(1250)` |
 | `___` | `___` |
 
 После сохранения файла проверка повторена.
 
 ![mypy без ошибок](img/06-08-mypy-success.png)
 
-`mypy proba.py`: `Success: no issues found in ___ source file`.
-`mypy app`: `Success: no issues found in ___ source files`.
+`mypy proba.py`: `Success: no issues found in 1 source file`.
+`mypy app`: `Success: no issues found in 15 source files`.
 
 ## 8. Проект без аннотаций
 
-На первом архиве mypy вывел `Found ___ errors in ___ files`.
-У всех ошибок код `___`. Ошибки появились потому, что в `pyproject.toml`
-включён параметр `___`.
+На первом архиве mypy вывел `Found 17 errors in 10 files`.
+У всех ошибок код `no-untyped-def`. Ошибки появились потому, что в `pyproject.toml`
+включён параметр `disallow_untyped_defs = true`.
 
 ![mypy на первом архиве](img/06-09-bez-tipov.png)
 
-Первая строка списка: `___`.
+Первая строка списка: `../../materials/tema-04-annotacii-tipov/otchet-kafe-bez-tipov/app/utils/text.py:1: error: Function is missing a type annotation  [no-untyped-def]`.
 
 ## 9. Какой тип видит проверка
 
 ![Тип bounds в редакторе и в терминале](img/06-10-tip.png)
 
-Pylance при наведении на `bounds` показал `___`. mypy в строке
-`reveal_type` вывел `___`.
+Pylance при наведении на `bounds` показал `(variable) bounds: tuple[int, int]`. mypy в строке
+`reveal_type` вывел `tuple[builtins.int, builtins.int]`.
 
 ## 10. Итог
 
 Если Pylance ошибок не показывает, а mypy показывает, первым делом
-проверяю, ___.
+проверяю, что в проекте выбран режим `basic`, интерпретатор — `.venv`, и файл сохранён: mypy читает его с диска.
 
-Не получилось: ___
+Не получилось: снять свои снимки окна VS Code. Номер в журнале и строка варианта пока не вписаны.
 
-ИИ: не использовался / использовался для ___
+ИИ: использовался для разбора вывода mypy и заполнения отчёта
