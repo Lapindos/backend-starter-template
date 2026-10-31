@@ -1,0 +1,78 @@
+Help on module app.services.calculator in app.services:
+
+NAME
+    app.services.calculator - Расчёты по списку целочисленных оценок.
+
+FUNCTIONS
+    calculate_average(values: list[int]) -> float
+        Считает среднее арифметическое оценок.
+
+        Args:
+            values: Оценки целыми баллами. Пустой список не принимается.
+
+        Returns:
+            Среднее. Деление без округления, единица измерения — балл.
+
+        Raises:
+            ValueError: Если список оценок пуст.
+
+    calculate_max(values: list[int]) -> int
+        Возвращает наибольшую оценку.
+
+        Args:
+            values: Оценки целыми баллами. Пустой список не принимается.
+
+        Returns:
+            Наибольший балл из списка.
+
+        Raises:
+            ValueError: Если список оценок пуст.
+
+    calculate_min(values: list[int]) -> int
+        Возвращает наименьшую оценку.
+
+        Args:
+            values: Оценки целыми баллами. Пустой список не принимается.
+
+        Returns:
+            Наименьший балл из списка.
+
+        Raises:
+            ValueError: Если список оценок пуст.
+
+    grade_bounds(values: list[int]) -> tuple[int, int]
+        Возвращает границы оценок: сначала минимум, затем максимум.
+
+        Args:
+            values: Оценки целыми баллами. Пустой список не принимается.
+
+        Returns:
+            Пара баллов. Первый элемент — минимум, второй — максимум.
+
+        Raises:
+            ValueError: Если список оценок пуст.
+
+FILE
+    /agent/repos/backend-starter-template/lesson_04/app/services/calculator.py
+
+
+Help on module app.services.report_file in app.services:
+
+NAME
+    app.services.report_file - Запись готового отчёта в текстовый файл.
+
+FUNCTIONS
+    save_report(path: pathlib.Path, lines: list[str]) -> int
+        Записывает строки отчёта в файл UTF-8.
+
+        Args:
+            path: Куда записать отчёт. Существующий файл перезаписывается целиком.
+            lines: Строки отчёта без перевода строки на конце каждой строки.
+
+        Returns:
+            Число записанных строк.
+
+FILE
+    /agent/repos/backend-starter-template/lesson_04/app/services/report_file.py
+
+
